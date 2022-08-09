@@ -20,7 +20,8 @@ You also can combine all these parameters:
   Ex: c0d3x -f 200,301,302,403 -t targets.txt -o output.txt
 
 This program could be used alone or combined with another command on pipeline:
-  Ex: gau https://google.com | grep "\.hs$" | c0d3x -f 200
+
+Ex: gau https://google.com | grep "\.js$" | c0d3x -f 200
 
 
 Hint: You can create a sLink into your /usr/bin folder.
