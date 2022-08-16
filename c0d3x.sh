@@ -21,10 +21,22 @@ Underline='\033[5m'
 Italic='\033[3m'
 RC='\033[0m'  #Reset Color
 
+banner() {
+
+printf ""
+printf ""
+printf "\033[1;30m        ___      _ \033[0m\033[1;92m_____\033[0m\033[1;35m__  __ \n"
+printf "\033[1;30m   ___ / _ \  __| |\033[0m\033[1;92m___ /\033[0m\033[1;35m\ \/ / \n"
+printf "\033[1;30m  / __| | | |/ _  |\033[0m\033[1;92m |_ \ \033[0m\033[1;35m\  /  \n"
+printf "\033[1;30m | (__| |_| | (_| |\033[0m\033[1;92m___) |\033[0m\033[1;35m/  \  \n"
+printf "\033[1;30m  \___|\___/ \__,_|\033[0m\033[1;92m____/\033[0m\033[1;35m/_/\_\ \n"
+printf "           \033[1;91mAuthor: \033[0;36m@h4rdx0 \033[0m \n"
+printf "\n"
+
+}
 
 helpFunction()
 {
-   echo ""
    echo "Usage-1: $0 -f 200,301,302,403 -t targets.txt -o out.txt"
    echo  ""
    echo "Usage-2: command | $0 -f 200,301,302,403 -t targets.txt -o out.txt"
@@ -146,19 +158,24 @@ if [ ! -z $targetFile ]; then
 
     fi
 
+    banner
+
     totalTargets=$(cat $targetFile | wc -l)
 
-    echo "Testing $totalTargets from $targetFile"
+    echo -e "${Gray}Testing ${LGreen}$totalTargets ${Gray}from ${LPurple}$targetFile"
+    echo ""
 
     for url in $(cat $targetFile); do
 
         urlChecker $url
-    
+
     done
 
 else
 
     if [ -t 0 ]; then
+
+        banner
 
         helpFunction
 
