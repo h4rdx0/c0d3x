@@ -49,12 +49,13 @@ helpFunction()
    exit 1
 }
 
-while getopts "f:o:t:r" opt; do
+while getopts "f:o:t:u:r" opt; do
    case "$opt" in
       f ) filter="$OPTARG" ;;
       o ) outputFile="$OPTARG";;
       t ) targetFile="$OPTARG" ;;
       r ) rawout="enabled" ;;
+      u ) url="$OPTARG" ;;
       ? ) helpFunction ;;
    esac
 done
@@ -150,13 +151,19 @@ function urlChecker {
 
 }
 
-if [ ! -z $targetFile ]; then
+function checkOutput {
 
     if [ ! -z $outputFile ]; then
 
         cat /dev/null > $outputFile
 
     fi
+
+}
+
+if [ ! -z $targetFile ]; then
+
+    checkOutput
 
     banner
 
@@ -171,6 +178,14 @@ if [ ! -z $targetFile ]; then
 
     done
 
+elif [ ! -z $url ]; then
+
+    checkOutput
+
+    banner
+
+    urlChecker $url
+
 else
 
     if [ -t 0 ]; then
@@ -181,11 +196,7 @@ else
 
     else
 
-        if [ ! -z $outputFile ]; then
-
-            cat /dev/null > $outputFile
-
-        fi
+        checkOutput
 
         while IFS= read url; do
 
